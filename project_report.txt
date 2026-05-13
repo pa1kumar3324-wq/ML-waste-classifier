@@ -1,0 +1,79 @@
+Project Report: ML Waste Classifier
+
+1. Project Overview
+-------------------
+The ML Waste Classifier is a real-time waste detection and classification application built with Python, TensorFlow, OpenCV, and NumPy. It uses a pre-trained Keras model to identify waste categories from webcam video frames and displays predictions live on screen.
+
+2. Project Purpose
+------------------
+The project demonstrates an end-to-end computer vision pipeline for environmental awareness applications. It is designed to show how to capture live video, preprocess images, perform inference with a deep learning model, and present results in an intuitive user interface.
+
+3. Repository Contents
+----------------------
+- `classifiers.py`: Main executable script. Loads the trained model, captures webcam video, preprocesses frames, executes inference, smooths results with a prediction buffer, and renders classification overlays.
+- `Labels.txt`: Class label definitions loaded by the script. Contains one waste category label per line.
+- `models/waste-classifier-mini-project.h5`: Pre-trained TensorFlow Keras model for waste classification.
+- `requirements.txt`: Python dependencies required to run the project.
+- `README.md`: Project documentation with installation and usage instructions.
+
+4. Technical Details
+---------------------
+- Model framework: TensorFlow / Keras
+- Inference input size: 224 x 224 pixels
+- Video capture: OpenCV webcam feed
+- Prediction smoothing: moving vote window of 7 frames
+- Display window size: 1280 x 720 pixels
+- Confidence threshold: 50%
+
+5. Implementation Highlights
+----------------------------
+- `load_model_and_labels()`: Loads the Keras model and reads class labels from the file system.
+- `preprocess_frame()`: Resizes video frames and normalizes pixel values for model input.
+- `smooth_prediction()`: Uses majority voting across recent prediction IDs to stabilize output.
+- Live display loop: Captures frames, runs inference, overlays label text, and updates the window continuously until user exit.
+
+6. Dependencies
+----------------
+The project dependencies are listed in `requirements.txt`:
+- tensorflow-cpu>=2.14.0,<3.0
+- opencv-python>=4.8.0
+- numpy>=1.26.0
+
+7. Installation Instructions
+----------------------------
+1. Create and activate a Python virtual environment:
+   ```bash
+   python3 -m venv venv
+   source venv/bin/activate
+   ```
+2. Install dependencies:
+   ```bash
+   pip install -r requirements.txt
+   ```
+
+8. Usage Instructions
+----------------------
+Run the waste classifier with:
+```bash
+python3 classifiers.py
+```
+Then point the webcam at waste items to classify them. The application will show the predicted label and confidence percentage on the screen. Press `Q` to quit.
+
+9. Assumptions and Requirements
+--------------------------------
+- A working webcam must be available at camera index 0.
+- The model file must exist at `models/waste-classifier-mini-project.h5`.
+- The label file must exist at `Labels.txt` (or `labels.txt`) in the repository root.
+- Internet access is not required to run the classifier once dependencies are installed.
+
+10. Potential Improvements
+---------------------------
+- Add support for multiple camera inputs or video file input.
+- Implement a graphical user interface to select model and label file paths.
+- Add logging for prediction confidence and frame processing times.
+- Expand the labels and retrain the model on a larger waste dataset.
+- Add batch or periodic frame saving for later analysis.
+
+11. Summary
+-----------
+The ML Waste Classifier is a concise demo of real-time computer vision classification. It combines webcam capture, TensorFlow inference, and OpenCV visualization for a complete waste detection workflow.
